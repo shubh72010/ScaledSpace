@@ -1,4 +1,7 @@
-const BASE_PATH = '/ScaledSpace';
+// Get the base path from the current script's location
+const script = document.currentScript;
+const scriptPath = new URL(script.src).pathname;
+const basePath = scriptPath.substring(0, scriptPath.indexOf('/assets/js/app.js'));
 
 // Service Worker Registration
 if ('serviceWorker' in navigator) {
@@ -17,17 +20,31 @@ class App {
     this.init();
   }
 
+  showLoadingIndicator() {
+    const main = document.querySelector('main');
+    main.innerHTML = `
+      <div class="loading-indicator">
+        <div class="spinner"></div>
+        <p>Loading application...</p>
+      </div>
+    `;
+  }
+
   async init() {
+    // Show loading indicator
+    this.showLoadingIndicator();
+
     try {
-      // Dynamically import components
+      console.log('Loading components from:', basePath);
+      // Dynamically import components using relative path
       const [
         { NotesComponent },
         { VoiceNotesComponent },
         { RemindersComponent }
       ] = await Promise.all([
-        import(`${BASE_PATH}/components/notes.js`),
-        import(`${BASE_PATH}/components/voicenotes.js`),
-        import(`${BASE_PATH}/components/reminders.js`)
+        import(`${basePath}/components/notes.js`),
+        import(`${basePath}/components/voicenotes.js`),
+        import(`${basePath}/components/reminders.js`)
       ]);
 
       // Initialize components
@@ -48,6 +65,7 @@ class App {
         <div class="error-message">
           <h2>Failed to load application</h2>
           <p>Please check your internet connection and try refreshing the page.</p>
+          <p class="error-details">${error.message}</p>
           <button onclick="window.location.reload()">Retry</button>
         </div>
       `;
