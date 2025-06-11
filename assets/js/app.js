@@ -1,6 +1,6 @@
-import { NotesComponent } from '/components/notes.js';
-import { VoiceNotesComponent } from '/components/voicenotes.js';
-import { RemindersComponent } from '/components/reminders.js';
+import { NotesComponent } from '../components/notes.js';
+import { VoiceNotesComponent } from '../components/voicenotes.js';
+import { RemindersComponent } from '../components/reminders.js';
 
 // Service Worker Registration
 if ('serviceWorker' in navigator) {
