@@ -1,14 +1,31 @@
 {
   "name": "scaledspace",
   "version": "1.0.0",
-  "description": "A minimalist, offline-first notes and reminders app",
+  "description": "A minimalist PWA for notes, voice notes, and reminders",
+  "main": "index.html",
   "scripts": {
-    "setup": "node scripts/setup.js",
+    "setup": "npm install && npm run generate-icons",
     "generate-icons": "node scripts/generate-icons.js",
-    "start": "npx serve ."
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shubh72010/ScaledSpace.git"
+  },
+  "keywords": [
+    "pwa",
+    "notes",
+    "voice-notes",
+    "reminders",
+    "offline-first"
+  ],
+  "author": "Shubh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shubh72010/ScaledSpace/issues"
+  },
+  "homepage": "https://shubh72010.github.io/ScaledSpace",
   "devDependencies": {
-    "sharp": "^0.32.1",
-    "serve": "^14.2.1"
+    "sharp": "^0.32.1"
   }
 } 

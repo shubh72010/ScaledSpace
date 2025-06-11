@@ -9,7 +9,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -28,4 +29,5 @@ jobs:
         with:
           folder: .  # The folder the action should deploy
           branch: gh-pages  # The branch the action should deploy to
-          clean: true  # Automatically remove deleted files from the deployment 
+          clean: true  # Automatically remove deleted files from the deployment
+          commit-message: "Deploy to GitHub Pages" 

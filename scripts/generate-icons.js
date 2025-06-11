@@ -2,32 +2,58 @@ const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
 
-const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
-const inputFile = path.join(__dirname, '../assets/icons/icon.svg');
-const outputDir = path.join(__dirname, '../assets/icons');
+const ICON_SIZES = [72, 96, 128, 144, 152, 192, 384, 512];
+const ICONS_DIR = path.join(__dirname, '..', 'assets', 'icons');
 
-// Ensure output directory exists
-if (!fs.existsSync(outputDir)) {
-  fs.mkdirSync(outputDir, { recursive: true });
+// Ensure icons directory exists
+if (!fs.existsSync(ICONS_DIR)) {
+  fs.mkdirSync(ICONS_DIR, { recursive: true });
 }
+
+// Base icon SVG (a simple circle with a dot)
+const svgIcon = `
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="256" cy="256" r="240" fill="black"/>
+  <circle cx="256" cy="256" r="80" fill="white"/>
+</svg>
+`;
 
 // Generate icons for each size
 async function generateIcons() {
-  for (const size of sizes) {
-    const outputFile = path.join(outputDir, `icon-${size}.png`);
-    await sharp(inputFile)
-      .resize(size, size)
-      .png()
-      .toFile(outputFile);
-    console.log(`Generated ${outputFile}`);
-  }
+  console.log('Generating PWA icons...');
+  
+  try {
+    // Create a buffer from the SVG
+    const svgBuffer = Buffer.from(svgIcon);
+    
+    // Generate each icon size
+    for (const size of ICON_SIZES) {
+      const outputPath = path.join(ICONS_DIR, `icon-${size}.png`);
+      await sharp(svgBuffer)
+        .resize(size, size)
+        .png()
+        .toFile(outputPath);
+      console.log(`Generated icon-${size}.png`);
+    }
 
-  // Generate favicon
-  await sharp(inputFile)
-    .resize(32, 32)
-    .png()
-    .toFile(path.join(__dirname, '../favicon.ico'));
-  console.log('Generated favicon.ico');
+    // Generate shortcut icons
+    const noteIcon = await sharp(svgBuffer)
+      .resize(96, 96)
+      .png()
+      .toFile(path.join(ICONS_DIR, 'note-96.png'));
+    console.log('Generated note-96.png');
+
+    const reminderIcon = await sharp(svgBuffer)
+      .resize(96, 96)
+      .png()
+      .toFile(path.join(ICONS_DIR, 'reminder-96.png'));
+    console.log('Generated reminder-96.png');
+
+    console.log('All icons generated successfully!');
+  } catch (error) {
+    console.error('Error generating icons:', error);
+    process.exit(1);
+  }
 }
 
-generateIcons().catch(console.error); 
+generateIcons(); 
