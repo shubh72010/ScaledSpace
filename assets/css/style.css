@@ -1,8 +1,22 @@
+/* Base Styles */
+:root {
+  --primary-color: #fff;
+  --background-color: #000;
+  --surface-color: #111;
+  --text-color: #fff;
+  --text-secondary: #ccc;
+  --accent-color: #ff4444;
+  --border-radius: 10px;
+  --transition-speed: 0.3s;
+  --touch-target-size: 44px;
+}
+
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
   background-color: #000;
   color: #fff;
+  overscroll-behavior-y: none;
 }
 
 header, nav {
@@ -484,5 +498,186 @@ button:active {
 
   .reminder-form-container {
     padding: 1rem;
+  }
+}
+
+/* Install Button Styles */
+.install-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--surface-color);
+  color: var(--text-color);
+  border: 1px solid #333;
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  min-height: var(--touch-target-size);
+}
+
+.install-button:hover {
+  background: #222;
+  transform: translateY(-1px);
+}
+
+.install-button:active {
+  transform: translateY(0);
+}
+
+.install-icon {
+  font-size: 1.2rem;
+}
+
+/* Mobile UX Improvements */
+button, 
+input[type="button"],
+input[type="submit"],
+.primary-button,
+.secondary-button,
+.delete-button,
+.record-button,
+.play-button {
+  min-height: var(--touch-target-size);
+  min-width: var(--touch-target-size);
+  padding: 0.75rem 1rem;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: all var(--transition-speed) ease;
+}
+
+/* Smooth transitions for all interactive elements */
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+.primary-button:hover,
+.secondary-button:hover,
+.delete-button:hover,
+.record-button:hover,
+.play-button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.1);
+}
+
+button:active,
+input[type="button"]:active,
+input[type="submit"]:active,
+.primary-button:active,
+.secondary-button:active,
+.delete-button:active,
+.record-button:active,
+.play-button:active {
+  transform: translateY(0);
+  filter: brightness(0.9);
+}
+
+/* Improved form controls for touch */
+input[type="text"],
+input[type="datetime-local"],
+textarea {
+  min-height: var(--touch-target-size);
+  padding: 0.75rem;
+  font-size: 1rem;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: var(--border-radius);
+  transition: all var(--transition-speed) ease;
+}
+
+/* Focus states for better accessibility */
+button:focus,
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Improved card interactions */
+.note-card,
+.voicenote-card,
+.reminder-card {
+  transition: transform var(--transition-speed) ease,
+              box-shadow var(--transition-speed) ease;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.note-card:hover,
+.voicenote-card:hover,
+.reminder-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+  transition: opacity var(--transition-speed) ease;
+}
+
+/* Improved mobile navigation */
+nav {
+  position: sticky;
+  bottom: 0;
+  background: var(--background-color);
+  padding: 0.5rem;
+  z-index: 100;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+}
+
+nav button {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  transition: color var(--transition-speed) ease;
+}
+
+nav button.active {
+  color: var(--text-color);
+}
+
+nav button .icon {
+  font-size: 1.5rem;
+}
+
+/* Improved scrolling */
+.notes-list,
+.voicenotes-list,
+.reminders-list {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
+/* Improved mobile header */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--background-color);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Safe area insets for modern mobile browsers */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  nav {
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
   }
 } 
