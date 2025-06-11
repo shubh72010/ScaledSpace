@@ -1,0 +1,14 @@
+{
+  "name": "scaledspace",
+  "version": "1.0.0",
+  "description": "A minimalist, offline-first notes and reminders app",
+  "scripts": {
+    "setup": "node scripts/setup.js",
+    "generate-icons": "node scripts/generate-icons.js",
+    "start": "npx serve ."
+  },
+  "devDependencies": {
+    "sharp": "^0.32.1",
+    "serve": "^14.2.1"
+  }
+} 
