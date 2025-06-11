@@ -1,6 +1,4 @@
-import { NotesComponent } from '../components/notes.js';
-import { VoiceNotesComponent } from '../components/voicenotes.js';
-import { RemindersComponent } from '../components/reminders.js';
+const BASE_PATH = '/ScaledSpace';
 
 // Service Worker Registration
 if ('serviceWorker' in navigator) {
@@ -20,16 +18,40 @@ class App {
   }
 
   async init() {
-    // Initialize components
-    this.notesComponent = new NotesComponent();
-    this.voiceNotesComponent = new VoiceNotesComponent();
-    this.remindersComponent = new RemindersComponent();
-    
-    // Setup install prompt
-    this.setupInstallPrompt();
-    
-    // Show notes view by default
-    document.getElementById('notesBtn').click();
+    try {
+      // Dynamically import components
+      const [
+        { NotesComponent },
+        { VoiceNotesComponent },
+        { RemindersComponent }
+      ] = await Promise.all([
+        import(`${BASE_PATH}/components/notes.js`),
+        import(`${BASE_PATH}/components/voicenotes.js`),
+        import(`${BASE_PATH}/components/reminders.js`)
+      ]);
+
+      // Initialize components
+      this.notesComponent = new NotesComponent();
+      this.voiceNotesComponent = new VoiceNotesComponent();
+      this.remindersComponent = new RemindersComponent();
+      
+      // Setup install prompt
+      this.setupInstallPrompt();
+      
+      // Show notes view by default
+      document.getElementById('notesBtn').click();
+    } catch (error) {
+      console.error('Failed to load components:', error);
+      // Show error message to user
+      const main = document.querySelector('main');
+      main.innerHTML = `
+        <div class="error-message">
+          <h2>Failed to load application</h2>
+          <p>Please check your internet connection and try refreshing the page.</p>
+          <button onclick="window.location.reload()">Retry</button>
+        </div>
+      `;
+    }
   }
 
   setupInstallPrompt() {
