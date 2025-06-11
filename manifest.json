@@ -2,57 +2,57 @@
   "name": "ScaledSpace - Offline Notes & Reminders",
   "short_name": "ScaledSpace",
   "description": "A minimalist, offline-first notes and reminders app",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "/ScaledSpace/",
+  "scope": "/ScaledSpace/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
   "orientation": "any",
   "icons": [
     {
-      "src": "/assets/icons/icon-72.png",
+      "src": "assets/icons/icon-72.png",
       "sizes": "72x72",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/assets/icons/icon-96.png",
+      "src": "assets/icons/icon-96.png",
       "sizes": "96x96",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/assets/icons/icon-128.png",
+      "src": "assets/icons/icon-128.png",
       "sizes": "128x128",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/assets/icons/icon-144.png",
+      "src": "assets/icons/icon-144.png",
       "sizes": "144x144",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/assets/icons/icon-152.png",
+      "src": "assets/icons/icon-152.png",
       "sizes": "152x152",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/assets/icons/icon-192.png",
+      "src": "assets/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/assets/icons/icon-384.png",
+      "src": "assets/icons/icon-384.png",
       "sizes": "384x384",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/assets/icons/icon-512.png",
+      "src": "assets/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
@@ -63,15 +63,15 @@
       "name": "New Note",
       "short_name": "New Note",
       "description": "Create a new text note",
-      "url": "/?action=new-note",
-      "icons": [{ "src": "/assets/icons/note-96.png", "sizes": "96x96" }]
+      "url": "/ScaledSpace/?action=new-note",
+      "icons": [{ "src": "assets/icons/note-96.png", "sizes": "96x96" }]
     },
     {
       "name": "New Reminder",
       "short_name": "New Reminder",
       "description": "Create a new reminder",
-      "url": "/?action=new-reminder",
-      "icons": [{ "src": "/assets/icons/reminder-96.png", "sizes": "96x96" }]
+      "url": "/ScaledSpace/?action=new-reminder",
+      "icons": [{ "src": "assets/icons/reminder-96.png", "sizes": "96x96" }]
     }
   ]
 } 

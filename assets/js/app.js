@@ -1,10 +1,10 @@
-import { NotesComponent } from '../components/notes.js';
-import { VoiceNotesComponent } from '../components/voicenotes.js';
-import { RemindersComponent } from '../components/reminders.js';
+import { NotesComponent } from '/components/notes.js';
+import { VoiceNotesComponent } from '/components/voicenotes.js';
+import { RemindersComponent } from '/components/reminders.js';
 
 // Service Worker Registration
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/service-worker.js')
+  navigator.serviceWorker.register('service-worker.js')
     .then(() => console.log("Service Worker Registered!"))
     .catch(err => console.error("Service Worker Registration Failed:", err));
 }
